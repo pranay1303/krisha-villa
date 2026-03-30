@@ -1,5 +1,5 @@
 import { Gift, Heart, Clock, Users, Sparkles, Percent, PartyPopper } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useInView } from './hooks/useInView';
 
 export function OffersSection() {
@@ -10,16 +10,16 @@ export function OffersSection() {
       icon: Clock,
       discount: '10% OFF',
       title: 'Early Booking Offer',
-      description: 'Valid when booked 7 days in advance',
+      description: 'Valid when booked 20 days in advance',
       badge: '⏳ Limited Time',
       badgeColor: 'bg-orange-500',
       glowColor: 'shadow-orange-500/50',
     },
     {
       icon: Users,
-      discount: '15% OFF',
+      discount: '10% OFF',
       title: 'Group Booking Discount',
-      description: 'Applicable for groups of 10+ people',
+      description: 'Works for groups of 20+ next time you visit.',
       badge: '🔥 Hot Deal',
       badgeColor: 'bg-red-500',
       glowColor: 'shadow-red-500/50',
@@ -27,17 +27,17 @@ export function OffersSection() {
     {
       icon: PartyPopper,
       discount: 'FREE',
-      title: 'Free Decoration',
-      description: 'Birthday Special - Complimentary decoration for celebrations',
+      title: 'Free Cake',
+      description: 'Birthday Special - Complimentary cake',
       badge: '🎉 Popular',
       badgeColor: 'bg-purple-500',
       glowColor: 'shadow-purple-500/50',
     },
     {
       icon: Percent,
-      discount: '₹1000 OFF',
-      title: 'Weekend Deal',
-      description: 'Limited slots available',
+      discount: '₹500 OFF',
+      title: 'WeekDays Deal',
+      description: 'Book for weekdays and get ₹500 off on your stay',
       badge: '⚡ Weekend Only',
       badgeColor: 'bg-blue-500',
       glowColor: 'shadow-blue-500/50',
@@ -46,7 +46,7 @@ export function OffersSection() {
       icon: Heart,
       discount: 'SPECIAL',
       title: 'Couple Special Offer',
-      description: 'Discounted romantic package for couples',
+      description: 'Specially curated romantic package for couples at a discounted price.',
       badge: '❤️ Trending',
       badgeColor: 'bg-pink-500',
       glowColor: 'shadow-pink-500/50',

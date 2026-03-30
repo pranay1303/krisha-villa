@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Send } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useInView } from './hooks/useInView';
 
 export function ContactSection() {
@@ -199,12 +199,12 @@ export function ContactSection() {
                       +91 80875 36077
                     </a>
                     <a
-                      href="https://wa.me/918605967962"
+                      href="https://wa.me/918605957962"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-700 hover:text-[#25D366] transition-colors block"
                     >
-                      +91 86059 67962
+                      +91 86059 57962
                     </a>
                   </div>
                 </div>
@@ -233,10 +233,10 @@ export function ContactSection() {
             {/* Google Map */}
             <div className="rounded-2xl overflow-hidden shadow-lg h-80">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120615.59873539662!2d73.32212542498243!3d18.908460700000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7eb5fcc993d35%3A0xc5838c792592026d!2sKarjat%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1647856789123!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d896.3039953875531!2d73.38836330413831!3d19.02660946377664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7f73c87dd5089%3A0x868308d3f2552b92!2s29GQ%2BJM%2C%20Gudhavan%2C%20Maharashtra%20410201!5e1!3m2!1sen!2sin!4v1774891976088!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0 }   }
                 allowFullScreen
                 loading="lazy"
                 title="Krisha Villa Location"

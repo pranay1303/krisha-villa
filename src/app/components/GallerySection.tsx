@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Masonry from 'react-responsive-masonry';
 import { useInView } from './hooks/useInView';
 
@@ -95,7 +95,14 @@ export function GallerySection() {
         </motion.div>
 
         {/* Masonry Gallery */}
-        <Masonry columnsCount={window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3} gutter="1rem">
+        <Masonry
+  columnsCountBreakPoints={{
+    350: 1,
+    768: 2,
+    1024: 3
+  }}
+  gutter="1rem"
+>
           {filteredImages.map((image, index) => (
             <motion.div
               key={index}

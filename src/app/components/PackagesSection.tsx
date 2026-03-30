@@ -1,5 +1,5 @@
 import { Check, Star } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useInView } from './hooks/useInView';
 
 export function PackagesSection() {
@@ -24,9 +24,9 @@ export function PackagesSection() {
     },
     {
       name: 'One Night Stay',
-      price: '₹6999',
-      weekendPrice: '₹8999',
-      duration: 'Full Villa',
+      price: '₹1999',
+      weekendPrice: '₹2399',
+      duration: 'Per Person',
       features: [
         'Private pool access',
         'AC rooms',
@@ -37,14 +37,14 @@ export function PackagesSection() {
       badge: '🔥 Most Booked',
       badgeColor: 'from-orange-500 to-red-500',
       popular: true,
-      microText: '👉 Booked 15+ times this week',
+      microText: '👉 Booked most of the time',
     },
     {
       name: 'Couple Special',
-      price: '₹2999',
+      price: '₹5999',
       duration: 'Per Couple',
       features: [
-        'Romantic decoration',
+        'Air conditioned rooms',
         'Pool access',
         'Music setup',
         'Private experience',
@@ -59,7 +59,7 @@ export function PackagesSection() {
       price: 'Custom Package',
       duration: '',
       features: [
-        'Decoration included',
+        'Customizable party setup',
         'DJ & music setup',
         'BBQ & food arrangement',
         'Celebration area',
@@ -74,7 +74,7 @@ export function PackagesSection() {
       price: 'Custom Pricing',
       duration: '',
       features: [
-        'For 8–20 people',
+        'For 15–20 people',
         'Full villa booking',
         'Games & activities',
         'Custom arrangements',
@@ -100,7 +100,7 @@ export function PackagesSection() {
       extraBadgeColor: 'from-red-600 to-red-700',
       popular: false,
       highlight: true,
-      microText: '👉 Only 2 slots left',
+      microText: '',
     },
   ];
 

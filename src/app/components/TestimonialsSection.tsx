@@ -1,5 +1,5 @@
 import { Star } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,36 +14,41 @@ export function TestimonialsSection() {
       location: 'Mumbai',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
       rating: 5,
-      review: 'Krisha Villa exceeded all our expectations! The pool, the rooms, the ambiance - everything was perfect. It was the ideal place for our anniversary celebration. Highly recommended!',
+      review:
+        'Krisha Villa exceeded all our expectations! The pool, the rooms, the ambiance - everything was perfect. It was the ideal place for our anniversary celebration. Highly recommended!',
     },
     {
       name: 'Amit Patel',
       location: 'Pune',
       image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
       rating: 5,
-      review: 'We had an amazing weekend with friends at Krisha Villa. The villa is spacious, clean, and surrounded by nature. The BBQ setup and private pool made our stay memorable. Will definitely visit again!',
+      review:
+        'We had an amazing weekend with friends at Krisha Villa. The villa is spacious, clean, and surrounded by nature. The BBQ setup and private pool made our stay memorable. Will definitely visit again!',
     },
     {
       name: 'Sneha Desai',
       location: 'Thane',
       image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
       rating: 5,
-      review: 'A perfect getaway from the city chaos! The villa is beautifully maintained, and the staff is very courteous. The view of the hills is breathtaking. Loved every moment here.',
+      review:
+        'A perfect getaway from the city chaos! The villa is beautifully maintained, and the staff is very courteous. The view of the hills is breathtaking. Loved every moment here.',
     },
     {
       name: 'Vikram & Aditi Singh',
       location: 'Navi Mumbai',
       image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop',
       rating: 5,
-      review: 'Krisha Villa is a hidden gem in Karjat! Perfect for a family vacation. The kids loved the pool, and we enjoyed the peaceful surroundings. Great hospitality and excellent amenities.',
+      review:
+        'Krisha Villa is a hidden gem in Karjat! Perfect for a family vacation. The kids loved the pool, and we enjoyed the peaceful surroundings. Great hospitality and excellent amenities.',
     },
   ];
 
+  // ✅ FINAL RESPONSIVE SETTINGS
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 3, // 💻 Desktop
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
@@ -52,30 +57,32 @@ export function TestimonialsSection() {
     touchThreshold: 10,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1024, // 📲 Tablet
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 768, // 📱 Mobile
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
+          centerMode: false,
         },
       },
     ],
   };
 
   return (
-    <section id="reviews" className="py-20 md:py-32 bg-[#faf5ed]">
+    <section id="reviews" className="py-20 md:py-32 bg-[#faf5ed] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Heading */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -87,35 +94,49 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
+        {/* Slider */}
         <div className="testimonials-slider">
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="px-4">
-                <div className="bg-white rounded-2xl p-8 shadow-lg h-full">
+              <div key={index} className="px-2 md:px-3">
+
+                {/* ✅ FULL WIDTH CARD (NO max-w) */}
+                <div className="w-full bg-white rounded-2xl p-5 md:p-8 shadow-lg h-full flex flex-col justify-between">
+
                   {/* Rating */}
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={20} className="text-[#d4af37] fill-[#d4af37]" />
+                      <Star
+                        key={i}
+                        size={18}
+                        className="text-[#d4af37] fill-[#d4af37]"
+                      />
                     ))}
                   </div>
 
                   {/* Review */}
-                  <p className="text-gray-700 leading-relaxed mb-6 italic">
+                  <p className="text-gray-700 leading-relaxed mb-6 italic text-sm md:text-base">
                     "{testimonial.review}"
                   </p>
 
-                  {/* Guest Info */}
-                  <div className="flex items-center gap-4">
+                  {/* User Info */}
+                  <div className="flex items-center gap-4 mt-auto">
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
                       className="w-12 h-12 rounded-full object-cover"
+                      loading="lazy"
                     />
                     <div>
-                      <h4 className="font-bold text-[#1a4d2e]">{testimonial.name}</h4>
-                      <p className="text-sm text-gray-600">{testimonial.location}</p>
+                      <h4 className="font-bold text-[#1a4d2e]">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-sm text-gray-600">
+                        {testimonial.location}
+                      </p>
                     </div>
                   </div>
+
                 </div>
               </div>
             ))}
@@ -123,18 +144,24 @@ export function TestimonialsSection() {
         </div>
       </div>
 
+      {/* Dots Styling */}
       <style>{`
         .testimonials-slider .slick-dots {
-          bottom: -50px;
+          bottom: -40px;
         }
 
         .testimonials-slider .slick-dots li button:before {
-          font-size: 12px;
+          font-size: 10px;
           color: #1a4d2e;
         }
 
         .testimonials-slider .slick-dots li.slick-active button:before {
           color: #d4af37;
+        }
+
+        .slick-slide {
+          display: flex !important;
+          justify-content: center;
         }
       `}</style>
     </section>

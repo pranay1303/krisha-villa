@@ -1,5 +1,5 @@
 import { ChevronDown } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 export function HeroSection() {
   const scrollToNext = () => {

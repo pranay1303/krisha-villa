@@ -1,5 +1,5 @@
 import { Trees, ShieldCheck, Sparkles } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { useInView } from './hooks/useInView';
 
 export function AboutSection() {
