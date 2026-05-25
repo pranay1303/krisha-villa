@@ -1,83 +1,126 @@
-import { Gift, Heart, Clock, Users, Sparkles, Percent, PartyPopper } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import {
+  Clock,
+  Users,
+  Sparkles,
+  Percent,
+  Heart,
+  PartyPopper,
+} from 'lucide-react';
+
 import { motion } from 'framer-motion';
 import { useInView } from './hooks/useInView';
 
 export function OffersSection() {
   const [ref, isInView] = useInView({ threshold: 0.2 });
+  const [activeCard, setActiveCard] = useState(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        sectionRef.current &&
+        !sectionRef.current.contains(event.target)
+      ) {
+        setActiveCard(null);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
 
   const offers = [
     {
       icon: Clock,
       discount: '10% OFF',
       title: 'Early Booking Offer',
-      description: 'Valid when booked 20 days in advance',
-      badge: '⏳ Limited Time',
+      description: 'Valid when booked 30 days in advance',
+      badge: '⏳ Limited',
       badgeColor: 'bg-orange-500',
-      glowColor: 'shadow-orange-500/50',
     },
     {
       icon: Users,
-      discount: '10% OFF',
+      discount: '5% OFF',
       title: 'Group Booking Discount',
-      description: 'Works for groups of 20+ next time you visit.',
-      badge: '🔥 Hot Deal',
+      description: 'Works for groups of 20+ guests.',
+      badge: '🔥 Hot',
       badgeColor: 'bg-red-500',
-      glowColor: 'shadow-red-500/50',
     },
     {
       icon: PartyPopper,
       discount: 'FREE',
       title: 'Free Cake',
-      description: 'Birthday Special - Complimentary cake',
+      description: 'Birthday special complimentary cake',
       badge: '🎉 Popular',
       badgeColor: 'bg-purple-500',
-      glowColor: 'shadow-purple-500/50',
     },
     {
       icon: Percent,
       discount: '₹500 OFF',
-      title: 'WeekDays Deal',
-      description: 'Book for weekdays and get ₹500 off on your stay',
-      badge: '⚡ Weekend Only',
+      title: 'Weekdays Deal',
+      description: 'Save ₹500 on weekday bookings',
+      badge: '⚡ Deal',
       badgeColor: 'bg-blue-500',
-      glowColor: 'shadow-blue-500/50',
     },
     {
       icon: Heart,
       discount: 'SPECIAL',
-      title: 'Couple Special Offer',
-      description: 'Specially curated romantic package for couples at a discounted price.',
+      title: 'Couple Special',
+      description: 'Romantic villa experience at special pricing.',
       badge: '❤️ Trending',
       badgeColor: 'bg-pink-500',
-      glowColor: 'shadow-pink-500/50',
     },
     {
       icon: Sparkles,
       discount: 'PREMIUM',
-      title: 'New Year Special Deal',
-      description: 'Exclusive premium celebration package - Limited time booking',
-      badge: '🎆 High Demand',
-      extraBadge: '⏳ Few Slots Left',
-      badgeColor: 'bg-gradient-to-r from-yellow-500 to-orange-500',
-      extraBadgeColor: 'bg-gradient-to-r from-red-600 to-red-700',
-      glowColor: 'shadow-yellow-500/50',
-      highlight: true,
+      title: 'New Year Special',
+      description: 'Exclusive celebration package.',
+      badge: '🎆 Demand',
+      badgeColor: 'bg-yellow-500',
     },
   ];
 
+  // ✅ WhatsApp message generator
+  const generateWhatsAppLink = (offer) => {
+  const message =
+    `Hi, I want to claim this offer\n` +
+    `Offer: ${offer.title}\n` +
+    `Discount: ${offer.discount}\n` +
+    `Description: ${offer.description}`;
+
+  return `https://wa.me/918087536077?text=${encodeURIComponent(message)}`;
+};
+
   return (
-    <section id="offers" className="py-20 md:py-32 bg-gradient-to-br from-[#1a4d2e] via-[#1a4d2e] to-[#133a22] relative overflow-hidden">
-      {/* Background decoration */}
+    <section
+      id="offers"
+      className="py-20 md:py-32 bg-gradient-to-br from-[#1a4d2e] via-[#1a4d2e] to-[#133a22] relative overflow-hidden"
+    >
+      {/* Background */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-[#d4af37] rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#d4af37] rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div
+        ref={sectionRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+      >
+        {/* Heading */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          animate={
+            isInView
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 50 }
+          }
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -89,68 +132,104 @@ export function OffersSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {offers.map((offer, index) => (
-            <motion.div
-              key={offer.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`relative bg-white rounded-2xl p-6 transition-all group overflow-hidden ${
-                offer.highlight
-                  ? 'ring-4 ring-yellow-400 shadow-2xl hover:shadow-yellow-500/30'
-                  : 'shadow-xl hover:shadow-2xl'
-              } hover:scale-105 ${offer.glowColor} hover:${offer.glowColor}`}
-            >
-              {/* Animated gradient background on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        {/* GRID */}
+        <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
 
-              {/* Badges */}
-              <div className="absolute top-4 right-4 flex flex-col gap-2 items-end z-10">
-                <div
-                  className={`${offer.badgeColor} text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg`}
-                >
-                  {offer.badge}
-                </div>
-                {offer.extraBadge && (
-                  <div
-                    className={`${offer.extraBadgeColor} text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg animate-pulse`}
-                  >
-                    {offer.extraBadge}
-                  </div>
-                )}
-              </div>
+          {offers.map((offer, index) => {
+            const isActive = activeCard === index;
+            const Icon = offer.icon;
 
-              {/* Discount Badge */}
-              <div className="relative mb-4">
-                <div className="inline-flex items-center justify-center bg-gradient-to-br from-[#1a4d2e] to-[#133a22] text-white px-6 py-3 rounded-2xl font-bold text-2xl shadow-lg group-hover:scale-110 transition-transform">
-                  {offer.discount}
-                </div>
-              </div>
-
-              {/* Icon */}
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-[#1a4d2e] to-[#133a22] rounded-full mb-4 group-hover:scale-110 transition-transform relative z-10">
-                <offer.icon className="text-white" size={28} />
-              </div>
-
-              {/* Content */}
-              <h3 className="text-xl font-bold text-[#1a4d2e] mb-2 pr-20 relative z-10">
-                {offer.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed mb-5 relative z-10">
-                {offer.description}
-              </p>
-
-              <a
-                href="https://wa.me/918087536077?text=Hi%2C%20I%20want%20to%20claim%20this%20offer"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-[#1a4d2e] text-white px-6 py-3 rounded-full hover:bg-[#133a22] transition-all font-medium shadow-md hover:shadow-lg relative z-10"
+            return (
+              <div
+                key={offer.title}
+                className="cursor-pointer"
+                onClick={() =>
+                  setActiveCard(isActive ? null : index)
+                }
               >
-                Claim Offer
-              </a>
-            </motion.div>
-          ))}
+                {/* FLIP CARD */}
+                <div
+                  className="relative w-full h-[210px] md:h-[300px] transition-transform duration-700"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transform: isActive
+                      ? 'rotateY(180deg)'
+                      : 'rotateY(0deg)',
+                  }}
+                >
+
+                  {/* FRONT */}
+                  <div className="absolute inset-0 backface-hidden rounded-3xl bg-white shadow-xl flex flex-col items-center justify-center p-3 md:p-6">
+
+                    {/* BADGE (ONLY LARGE SCREENS) */}
+                    <div className="hidden lg:flex absolute top-3 right-3">
+                      <div
+                        className={`${offer.badgeColor} text-white px-2 py-1 rounded-full text-xs font-semibold`}
+                      >
+                        {offer.badge}
+                      </div>
+                    </div>
+
+                    <div className="text-center space-y-2">
+
+                      <div className="text-[#1a4d2e] font-bold text-lg md:text-2xl">
+                        {offer.discount}
+                      </div>
+
+                      <div className="w-10 h-10 md:w-14 md:h-14 mx-auto bg-[#1a4d2e] rounded-full flex items-center justify-center">
+                        <Icon className="text-white" size={20} />
+                      </div>
+
+                      <h3 className="text-[11px] md:text-lg font-bold text-[#1a4d2e] leading-tight">
+                        {offer.title}
+                      </h3>
+
+                      <p className="text-[10px] md:text-sm text-gray-500">
+                        Tap to flip
+                      </p>
+
+                      {/* FRONT CLAIM BUTTON */}
+                      <a
+                        href={generateWhatsAppLink(offer)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-block bg-[#1a4d2e] text-white text-[10px] md:text-sm px-4 py-1.5 rounded-full font-semibold shadow-md"
+                      >
+                        Claim Offer
+                      </a>
+
+                    </div>
+                  </div>
+
+                  {/* BACK */}
+                  <div className="absolute inset-0 rotate-y-180 backface-hidden rounded-3xl bg-[#1a4d2e] text-white shadow-2xl flex flex-col justify-between p-3 md:p-6">
+
+                    <div>
+                      <h3 className="text-sm md:text-lg font-bold mb-2">
+                        {offer.title}
+                      </h3>
+
+                      <p className="text-[10px] md:text-sm text-white/80 leading-relaxed">
+                        {offer.description}
+                      </p>
+                    </div>
+
+                    {/* BACK CLAIM BUTTON */}
+                    <a
+                      href={generateWhatsAppLink(offer)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white text-[#1a4d2e] text-center py-2 rounded-full font-semibold text-sm"
+                    >
+                      Claim Offer
+                    </a>
+
+                  </div>
+
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -13,7 +13,6 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 50);
 
       const sections = [
-        'home',
         'amenities',
         'gallery',
         'packages',
@@ -47,7 +46,6 @@ export function Navbar() {
   }, [isMobileMenuOpen]);
 
   const menuItems = [
-    { name: 'Home', href: '#home' },
     { name: 'Amenities', href: '#amenities' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Packages', href: '#packages' },
@@ -85,7 +83,9 @@ export function Navbar() {
               }}
               className="flex flex-col"
             >
-              <span className="text-xl md:text-2xl font-bold text-[#1a4d2e]">
+              <span className="text-xl md:text-2xl font-bold text-[#56d488]"
+              style={{ WebkitTextStroke: "0.8px black" }}
+              >
                 Krisha Villa
               </span>
               <span className="text-[10px] md:text-xs text-[#d4af37] uppercase">
