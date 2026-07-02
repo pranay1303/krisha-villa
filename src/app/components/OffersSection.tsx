@@ -128,8 +128,20 @@ export function OffersSection() {
             Exclusive Offers
           </h2>
           <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            Take advantage of our special deals and packages
-          </p>
+  Take advantage of our special deals and packages
+</p>
+
+<div className="mt-6 max-w-4xl mx-auto">
+  <div className="inline-block bg-[#d4af37]/15 border border-[#d4af37] rounded-xl px-5 py-3">
+    <p className="text-sm md:text-base text-white">
+      <span className="font-bold text-[#d4af37]">⚠️ NOTE:</span>{" "}
+      Advance booking via our{" "}
+      <span className="font-semibold">Website</span> or{" "}
+      <span className="font-semibold">WhatsApp</span> is mandatory. Mention the
+      offer while booking.
+    </p>
+  </div>
+</div>
         </motion.div>
 
         {/* GRID */}
@@ -202,7 +214,7 @@ export function OffersSection() {
                   </div>
 
                   {/* BACK */}
-                  <div className="absolute inset-0 rotate-y-180 backface-hidden rounded-3xl bg-[#1a4d2e] text-white shadow-2xl flex flex-col justify-between p-3 md:p-6">
+                  <div className="absolute inset-0 rotate-y-180 backface-hidden rounded-3xl bg-[#61637d] text-white shadow-2xl flex flex-col justify-between p-3 md:p-6">
 
                     <div>
                       <h3 className="text-sm md:text-lg font-bold mb-2">

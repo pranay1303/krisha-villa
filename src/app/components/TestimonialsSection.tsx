@@ -9,70 +9,78 @@ export function TestimonialsSection() {
   const [ref, isInView] = useInView({ threshold: 0.2 });
 
   const testimonials = [
-    {
-      name: 'Priya & Rahul Sharma',
-      location: 'Mumbai',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
-      rating: 5,
-      review:
-        'Krisha Villa exceeded all our expectations! The pool, the rooms, the ambiance - everything was perfect. It was the ideal place for our anniversary celebration. Highly recommended!',
-    },
-    {
-      name: 'Amit Patel',
-      location: 'Pune',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
-      rating: 5,
-      review:
-        'We had an amazing weekend with friends at Krisha Villa. The villa is spacious, clean, and surrounded by nature. The BBQ setup and private pool made our stay memorable. Will definitely visit again!',
-    },
-    {
-      name: 'Sneha Desai',
-      location: 'Thane',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-      rating: 5,
-      review:
-        'A perfect getaway from the city chaos! The villa is beautifully maintained, and the staff is very courteous. The view of the hills is breathtaking. Loved every moment here.',
-    },
-    {
-      name: 'Vikram & Aditi Singh',
-      location: 'Navi Mumbai',
-      image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop',
-      rating: 5,
-      review:
-        'Krisha Villa is a hidden gem in Karjat! Perfect for a family vacation. The kids loved the pool, and we enjoyed the peaceful surroundings. Great hospitality and excellent amenities.',
-    },
-  ];
+  {
+    name: "Priya & Rahul",
+    location: "Mumbai",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+    rating: 5,
+    review:
+      "We celebrated our anniversary here and honestly couldn't have picked a better place. The villa was spotless, the pool was amazing, and the peaceful surroundings made our stay unforgettable. We'll definitely be back!",
+  },
+  {
+    name: "Amit Patel",
+    location: "Pune",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
+    rating: 5,
+    review:
+      "Booked this villa for a weekend trip with friends and everyone loved it. Clean rooms, great music setup, a nice pool, and plenty of space to relax. The caretaker was also very helpful throughout our stay.",
+  },
+  {
+    name: "Sneha Desai",
+    location: "Thane",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+    rating: 5,
+    review:
+      "If you're looking to escape the city for a couple of days, this place is perfect. Beautiful views, fresh air, comfortable rooms, and everything was exactly as shown in the photos.",
+  },
+  {
+    name: "Vikram Singh",
+    location: "Navi Mumbai",
+    image:
+      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop",
+    rating: 5,
+    review:
+      "Visited with my family and the kids had an amazing time in the swimming pool. The villa is well maintained, spacious, and very peaceful. Great hospitality and worth every penny.",
+  },
+];
 
   // ✅ FINAL RESPONSIVE SETTINGS
   const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3, // 💻 Desktop
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
-    swipeToSlide: true,
-    touchThreshold: 10,
-    responsive: [
-      {
-        breakpoint: 1024, // 📲 Tablet
-        settings: {
-          slidesToShow: 2,
-        },
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2500,
+  pauseOnHover: true,
+  swipeToSlide: true,
+  adaptiveHeight: false,
+  centerMode: false,
+  variableWidth: false,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
       },
-      {
-        breakpoint: 768, // 📱 Mobile
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          centerMode: false,
-        },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        centerMode: false,
+        adaptiveHeight: true,
       },
-    ],
-  };
+    },
+  ],
+};
 
   return (
     <section id="reviews" className="py-20 md:py-32 bg-[#faf5ed] overflow-hidden">
@@ -98,10 +106,10 @@ export function TestimonialsSection() {
         <div className="testimonials-slider">
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="px-2 md:px-3">
+              <div key={index} className="px-2 py-2">
 
                 {/* ✅ FULL WIDTH CARD (NO max-w) */}
-                <div className="w-full bg-white rounded-2xl p-5 md:p-8 shadow-lg h-full flex flex-col justify-between">
+                <div className="bg-white rounded-2xl p-5 md:p-8 shadow-lg min-h-[320px] md:min-h-[360px] flex flex-col">
 
                   {/* Rating */}
                   <div className="flex gap-1 mb-4">
@@ -146,23 +154,48 @@ export function TestimonialsSection() {
 
       {/* Dots Styling */}
       <style>{`
-        .testimonials-slider .slick-dots {
-          bottom: -40px;
-        }
+        .testimonials-slider {
+  padding-bottom: 50px;
+}
 
-        .testimonials-slider .slick-dots li button:before {
-          font-size: 10px;
-          color: #1a4d2e;
-        }
+.testimonials-slider .slick-list {
+  overflow: hidden;
+}
 
-        .testimonials-slider .slick-dots li.slick-active button:before {
-          color: #d4af37;
-        }
+.testimonials-slider .slick-track {
+  display: flex !important;
+}
 
-        .slick-slide {
-          display: flex !important;
-          justify-content: center;
-        }
+.testimonials-slider .slick-slide {
+  height: inherit !important;
+}
+
+.testimonials-slider .slick-slide > div {
+  height: 100%;
+}
+
+.testimonials-slider .slick-slide > div > div {
+  height: 100%;
+}
+
+.testimonials-slider .slick-dots {
+  bottom: -35px;
+}
+
+.testimonials-slider .slick-dots li button:before {
+  font-size: 10px;
+  color: #1a4d2e;
+}
+
+.testimonials-slider .slick-dots li.slick-active button:before {
+  color: #d4af37;
+}
+
+@media (max-width:768px) {
+  .testimonials-slider .slick-slide {
+    padding: 0 6px;
+  }
+}
       `}</style>
     </section>
   );
